@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Addroom extends CI_Controller {
+class Room extends CI_Controller {
 
 public function __construct(){
  
@@ -17,6 +17,11 @@ public function __construct(){
 	{
 		$this->load->view('addroom');
 	}
+	public function roomlist()
+	{
+		$data['roomlist'] = $this->room_model->Show_all_rooms();
+		$this->load->view('listview', $data);
+	}
 	
 	public function create(){
       $user=array(
@@ -27,8 +32,14 @@ public function __construct(){
       'image-path'=>$this->input->post('image'),
       'status'=>$this->input->post('status')
         );
-   $this->room_model->register_room($user);
-		$this->load->view('welcome_message');
+    $this->room_model->register_room($user);
+	$message="Room is successfully added.";
+	$this->load->view('listview',$message);
+}
+
+}
+
+
 
 //$email_check=$this->user_model->email_check($user['user_email']);
  
@@ -43,5 +54,3 @@ public function __construct(){
   redirect('user');
  }
  */ 
-}
-}
