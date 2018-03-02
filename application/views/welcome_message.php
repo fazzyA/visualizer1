@@ -1,6 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
+
+
+if (isset($this->session->userdata['logged_in'])) {
+$username = ($this->session->userdata['logged_in']['username']);
+$email = ($this->session->userdata['logged_in']['email']);
+} else {
+header("location: login");
+}
+?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -1104,7 +1113,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a class="btn btn-primary" href="<?php echo base_url();?>index.php/user_authentication/logout">Logout</a>
           </div>
         </div>
       </div>
