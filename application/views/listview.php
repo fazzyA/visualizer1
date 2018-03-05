@@ -1,5 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+if(!(isset($message))){
+	$message="";
+}
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,10 +22,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
    <div class="panel panel-default">
     <div class="panel-heading">Room List</div>
     <div class="panel-body">
-	    <div class="col-sm-4" style="background-color:lavender;"><?php echo $message ;?>  </div>
+	    <div class="col-sm-4" style="background-color:#F5F5F5;"><?php echo $message ;?>  </div>
 		<div class="col-sm-4" style="background-color:lavender;">
 		<?php foreach($roomlist as $room) {
 			echo 'Room: '.$room->name;
+			echo "  <a href=".base_url()."index.php/room/edit/$room->id>Edit Room</a>";
 			echo "<br>";
 			echo 'squarefeet: '.$room->sqft;
 			echo "<hr>";

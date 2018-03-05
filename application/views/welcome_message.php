@@ -6,7 +6,7 @@ if (isset($this->session->userdata['logged_in'])) {
 $username = ($this->session->userdata['logged_in']['username']);
 $email = ($this->session->userdata['logged_in']['email']);
 } else {
-header("location: login");
+header("location: index.php/user_authentication/index");
 }
 ?>
 <!DOCTYPE html>
@@ -251,7 +251,7 @@ header("location: login");
               </div>
               <div class="mr-5">Add Room</div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="http://localhost/visualizer1/index.php/room">
+            <a class="card-footer text-white clearfix small z-1" href="<?= base_url();?>index.php/room">
               <span class="float-left">Click to Enter</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -267,7 +267,7 @@ header("location: login");
               </div>
               <div class="mr-5">View Rooms List</div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="room/roomlist">
+            <a class="card-footer text-white clearfix small z-1" href="<?= base_url();?>index.php/room/roomlist">
               <span class="float-left">View Details</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>

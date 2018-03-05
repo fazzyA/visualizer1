@@ -37,6 +37,25 @@ public function __construct(){
 	$this->load->view('listview',$message);
 }
 
+
+	public function edit($roomid){
+		//echo "id=".$roomid;
+		$data['room1']=$this->room_model->Show_room($roomid);
+		$this->load->view('addroom',$data);
+/*      $user=array(
+      'name'=>$this->input->post('name'),
+      //'user_email'=>$this->input->post('user_email'),
+      'area'=>$this->input->post('area'),
+      'sqft'=>$this->input->post('sqft'),
+      'image-path'=>$this->input->post('image'),
+      'status'=>$this->input->post('status')
+        );
+    $this->room_model->register_room($user);
+	$message="Room is successfully added.";
+ */}
+
+
+
 }
 
 
