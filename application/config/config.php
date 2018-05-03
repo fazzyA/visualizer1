@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
-$config['base_url'] = 'http://localhost/visualizer1';
+$config['base_url'] = 'http://localhost:8002/visualizer1/';
 /*
 |--------------------------------------------------------------------------
 | Index File

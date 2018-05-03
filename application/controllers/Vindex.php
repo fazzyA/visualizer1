@@ -18,8 +18,28 @@ class Vindex extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+
+    public function __construct()
+    {
+        parent::__construct();
+        // load Cloudinary PHP API library normally using lowercase "dummy" filename
+        $this->load->library('cloudinarylib');
+    }
+
 	public function index()
 	{
+       // $data = cl_image_tag("bathroom.png", array( "alt" => "Sample Image" ));
+       // echo "<pre>".$data."</pre>";
+       // var_dump($data);
 		$this->load->view('visualizer');
 	}
+
+	public function room($type,$tile){
+        echo $type;
+        $turl='http://res.cloudinary.com/halfbug/image/upload/l_bathroom.png/v1524027474/whole.png';
+
+        $data = cl_image_tag("bathroom.png", array( "alt" => "Sample Image" ));
+        //$this->load->view('room_layout',$data);
+        echo $data;
+    }
 }

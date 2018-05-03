@@ -26,10 +26,10 @@
 <body style="background-color: rgb(255, 255, 255);">
 
 
-<a download="room-styles-data.txt" href="https://www.toppstiles.co.uk/visualiser/" class="save-saved-rooms-to-disk yellowButton">Save As 'Room Styles Data'</a>
+<a download="room-styles-data.txt" href="https://visualiser/" class="save-saved-rooms-to-disk yellowButton">Save As 'Room Styles Data'</a>
 
 <div class="vit-message hide" style="display: none;">
-	<img class="hide" src="<?=base_url();?>assets/ajax-loader.gif" style="display: none;">
+	<img class="hide" src="<?=base_url();?>assets/ajax-loader.gif" style="padding-left: 110px; display: block;">
 	<p>First select a tile from Decorate Your Room on the left</p>
 </div>
 
@@ -95,8 +95,11 @@
 <div class="vit-page-container" style="display: block;">
 
 	<div class="scene-container">
-		<div id="scene" class="scene"><canvas width="1600" height="1068" class="render" style="width: 100%; height: auto;"></canvas>
-			<canvas class="outlines-canvas" onclick="void(0);" width="1600" height="1068" style="cursor: default; width: 100%; height: auto;">
+		<div id="scene" class="scene">
+            <canvas width="1600" height="1068" id="mask" class="render" style="width: 100%; height: auto; display:none"></canvas>
+            <canvas width="1600" height="1068" class="outlines-canvas" style="width: 100%; height: auto;"></canvas>
+            <canvas width="1600" height="1068" class="outlines-canvas" style="width: 100%; height: auto;"></canvas>
+			<canvas class="outlines-canvas" onclick="void(0);" width="1600" height="1068" style="cursor: pointer; width: 100%; height: auto;">
 				<p>Your browser doesn't support canvas.</p>
 			</canvas>
 		</div>
@@ -722,19 +725,30 @@
 
 			<div class="menu-items">
 
-				<a class="menu-item v-rooms-list selected">
+				<a class="menu-item v-rooms-list ">
 					
 					<p>SELECT A ROOM</p>
 				</a>
 
-				<div class="sub-menu-items"><a class="sub-menu-item" data-select-id="SelectRoomType=Bathroom">Bathrooms<span class="pull-right fa fa-angle-right"></span></a><a class="sub-menu-item" data-select-id="SelectRoomType=Kitchen">Kitchens<span class="pull-right fa fa-angle-right"></span></a><a class="sub-menu-item" data-select-id="SelectRoomType=Living Area">Living Areas<span class="pull-right fa fa-angle-right"></span></a><a class="sub-menu-item" data-select-id="SelectRoomType=Outside Space">Indoor/Outdoor<span class="pull-right fa fa-angle-right"></span></a><a class="sub-menu-item" data-select-id="SelectRoomType=Commercial Space">Commercial Spaces<span class="pull-right fa fa-angle-right"></span></a><a class="sub-menu-item" data-select-id="SelectRoomType=*">All Rooms<span class="pull-right fa fa-angle-right"></span></a><a class="sub-menu-item" data-select-id="SelectRoomType=Saved">My Saved Rooms<span class="pull-right fa fa-angle-right"></span></a></div>
+				<div class="sub-menu-items">
+                    <a class="sub-menu-item" data-select-id="SelectRoomType=Bathroom">Bathrooms</a>
+                    <a class="sub-menu-item" data-select-id="SelectRoomType=Kitchen">Kitchens</a>
+                    <a class="sub-menu-item" data-select-id="SelectRoomType=Living Area">Living Areas</a>
+<!--                    <a class="sub-menu-item" data-select-id="SelectRoomType=Outside Space">Indoor/Outdoor<span class="pull-right fa fa-angle-right"></span></a>-->
+<!--                    <a class="sub-menu-item" data-select-id="SelectRoomType=Commercial Space">Commercial Spaces<span class="pull-right fa fa-angle-right"></span></a>-->
+<!--                    <a class="sub-menu-item" data-select-id="SelectRoomType=*">All Rooms<span class="pull-right fa fa-angle-right"></span></a>-->
+<!--                    <a class="sub-menu-item" data-select-id="SelectRoomType=Saved">My Saved Rooms<span class="pull-right fa fa-angle-right"></span></a>-->
+                </div>
 
 				<a class="menu-item v-tiles-list">
 					
 					<p>DECORATE YOUR ROOM</p>
 				</a>
 
-				<div class="sub-menu-items"></div>
+				<div class="sub-menu-items">
+                    <a class="sub-menu-item" data-tiles-type="Wall Tiles">Wall Tiles<span class="pull-right fa fa-angle-right"></span></a>
+                    <a class="sub-menu-item" data-tiles-type="Floor Tiles">Floor Tiles<span class="pull-right fa fa-angle-right"></span></a>
+                </div>
 <!--
 				<a class="menu-item v-tile-area">
 					<img class="icon" src="<?=base_url();?>assets/icon_menu_createarea.png">
@@ -916,7 +930,8 @@
 					<div class="vl-room-type">
 						<div class="v-room-type-selector" data-select-id="SelectRoomType=Bathroom">
 							<p class="heading">Bathrooms</p>
-							<img class="vit-room-type" src="<?=base_url();?>assets/room_bathroom.png">
+
+                            <img class="vit-room-type" src="<?=base_url();?>assets/room_bathroom.png">
 							<div class="v-select-room-type-button">Select Room »</div>
 						</div>
 					</div>
@@ -924,77 +939,77 @@
 						<div class="v-room-type-selector" data-select-id="SelectRoomType=Kitchen">
 							<p class="heading">Kitchens</p>
 							<img class="vit-room-type" src="<?=base_url();?>assets/room_kitchen.png">
-							<div class="v-select-room-type-button">Select Room »</div>
+							<div class="v-select-room-type-button-disabled" >Select Room »</div>
 						</div>
 					</div>
 					<div class="vl-room-type">
 						<div class="v-room-type-selector" data-select-id="SelectRoomType=Living Area">
 							<p class="heading">Living Areas</p>
 							<img class="vit-room-type" src="<?=base_url();?>assets/room_living_areas.png">
-							<div class="v-select-room-type-button">Select Room »</div>
+							<div class="v-select-room-type-button-disabled">Select Room »</div>
 						</div>
 					</div>
-					<div class="vl-room-type">
-						<div class="v-room-type-selector" data-select-id="SelectRoomType=Outside Space">
-							<p class="heading">Indoor/Outdoor</p>
-							<img class="vit-room-type" src="<?=base_url();?>assets/room_indoor_outdoor.png">
-							<div class="v-select-room-type-button">Select Room »</div>
-						</div>
-					</div>
-					<div class="vl-room-type">
-						<div class="v-room-type-selector" data-select-id="SelectRoomType=Commercial Space">
-							<p class="heading">Commercial Spaces</p>
-							<img class="vit-room-type" src="<?=base_url();?>assets/room_commercial_spaces.png">
-							<div class="v-select-room-type-button">Select Room »</div>
-						</div>
-					</div>
-					<div class="vl-room-type">
-						<div class="v-room-type-selector" data-select-id="SelectRoomType=*">
-							<p class="heading">All Rooms</p>
-							<img class="vit-room-type" src="<?=base_url();?>assets/room_all_rooms.png">
-							<div class="v-select-room-type-button">Select Room »</div>
-						</div>
-					</div>
-					<div class="vl-room-type">
-						<div class="v-room-type-selector" data-select-id="SelectRoomType=Saved">
-							<p class="heading">My Saved Rooms</p>
-							<img class="vit-room-type" src="<?=base_url();?>assets/room_saved_rooms.png">
-							<div class="v-select-room-type-button">Select Room »</div>
-						</div>
-					</div>
+<!--					<div class="vl-room-type">-->
+<!--						<div class="v-room-type-selector" data-select-id="SelectRoomType=Outside Space">-->
+<!--							<p class="heading">Indoor/Outdoor</p>-->
+<!--							<img class="vit-room-type" src="--><?//=base_url();?><!--assets/room_indoor_outdoor.png">-->
+<!--							<div class="v-select-room-type-button-disabled">Select Room »</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--					<div class="vl-room-type">-->
+<!--						<div class="v-room-type-selector" data-select-id="SelectRoomType=Commercial Space">-->
+<!--							<p class="heading">Commercial Spaces</p>-->
+<!--							<img class="vit-room-type" src="--><?//=base_url();?><!--assets/room_commercial_spaces.png">-->
+<!--							<div class="v-select-room-type-button-disabled">Select Room »</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--					<div class="vl-room-type">-->
+<!--						<div class="v-room-type-selector" data-select-id="SelectRoomType=*">-->
+<!--							<p class="heading">All Rooms</p>-->
+<!--							<img class="vit-room-type" src="--><?//=base_url();?><!--assets/room_all_rooms.png">-->
+<!--							<div class="v-select-room-type-button-disabled">Select Room »</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--					<div class="vl-room-type">-->
+<!--						<div class="v-room-type-selector" data-select-id="SelectRoomType=Saved">-->
+<!--							<p class="heading">My Saved Rooms</p>-->
+<!--							<img class="vit-room-type" src="--><?//=base_url();?><!--assets/room_saved_rooms.png">-->
+<!--							<div class="v-select-room-type-button">Select Room »</div>-->
+<!--						</div>-->
+<!--					</div>-->
 				</div>
 			</div>
 
 			<div class="vit-content-rooms" style="display: none;">
-				<div class="v-select-room-back"> « Back</div>
-				<p class="heading hide">Select a Room</p>
-				<p class="heading">Select a Saved Room</p>
+<!--				<div class="v-select-room-back"> « Back</div>-->
+				<p class="heading hide">Sel ect a Room</p>
+<!--				<p class="heading">Select a Saved Room</p>-->
 				<p class="heading">Select a Room Style</p>
-				<p class="vit-commercial-rooms-sub-heading">Please note that some tiles may not be suitable for commercial areas. To double check please call Customer Services on 0800 783 6262 or visit your local store.</p>
-				<p class="rooms-empty vcol-md-offset-12 vl-text-center">
-					No Saved Rooms found<br><br>
-					Please create a room and then save it here where it can be admired, edited or even sent to your friends!
-				</p>
+<!--				<p class="vit-commercial-rooms-sub-heading">Please note that some tiles may not be suitable for commercial areas. To double check please call Customer Services on 0800 783 6262 or visit your local store.</p>-->
+<!--				<p class="rooms-empty vcol-md-offset-12 vl-text-center">-->
+<!--					No Saved Rooms found<br><br>-->
+<!--					Please create a room and then save it here where it can be admired, edited or even sent to your friends!-->
+<!--				</p>-->
 				<div class="rooms-list vl-rooms">
 					<div class="vl-room vit-room-container">
 						<div class="v-room-selector ROOM-STYLE" data-select-id="SELECT-ID-ROOM">
-							<button class="share HIDE-SHARE" data-select-id="SELECT-ID-SHARE">
-								<img alt="" src="<?=base_url();?>assets/saved_rooms_share.png">
-							</button>
-							<button class="email HIDE-EMAIL" data-select-id="SELECT-ID-EMAIL">
-								<img alt="" src="<?=base_url();?>assets/saved_rooms_email.png">
-							</button>
-							<button class="print HIDE-PRINT" data-select-id="SELECT-ID-PRINT">
-								<img alt="" src="<?=base_url();?>assets/saved_rooms_print.png">
-							</button>
-							<button class="close HIDE-DELETE" data-select-id="SELECT-ID-DELETE">
-								<img alt="" src="<?=base_url();?>assets/icon_close.png">
-							</button>
-							<img class="vit-room" src="<?=base_url();?>assets/Room1.jpg">
+<!--							<button class="share HIDE-SHARE" data-select-id="SELECT-ID-SHARE">-->
+<!--								<img alt="" src="--><?//=base_url();?><!--assets/saved_rooms_share.png">-->
+<!--							</button>-->
+<!--							<button class="email HIDE-EMAIL" data-select-id="SELECT-ID-EMAIL">-->
+<!--								<img alt="" src="--><?//=base_url();?><!--assets/saved_rooms_email.png">-->
+<!--							</button>-->
+<!--							<button class="print HIDE-PRINT" data-select-id="SELECT-ID-PRINT">-->
+<!--								<img alt="" src="--><?//=base_url();?><!--assets/saved_rooms_print.png">-->
+<!--							</button>-->
+<!--							<button class="close HIDE-DELETE" data-select-id="SELECT-ID-DELETE">-->
+<!--								<img alt="" src="--><?//=base_url();?><!--assets/icon_close.png">-->
+<!--							</button>-->
+							<img class="vit-room" src="<?=base_url();?>assets/bathroom-thumb.png">
 							<div class="v-select-room-button ROOM-BUTTON-STYLE HIDE-SELECT-ROOM">Select Room »</div>
 
-							<div class="v-view-room-button HIDE-VIEW-ROOM">View Room »</div>
-							<div class="v-view-tiles-used-button HIDE-VIEW-TILES-USED" data-select-id="SELECT-ID-VIEW-TILES-USED">View Tiles Used »</div>
+<!--							<div class="v-view-room-button HIDE-VIEW-ROOM">View Room »</div>-->
+<!--							<div class="v-view-tiles-used-button HIDE-VIEW-TILES-USED" data-select-id="SELECT-ID-VIEW-TILES-USED">View Tiles Used »</div>-->
 
 						</div>
 					</div>
@@ -1018,104 +1033,104 @@
 							<div class="v-select-tile-type-button">Select »</div>
 						</div>
 					</div>
-					<div class="vl-tile-type">
-						<div class="v-tile-type-selector" data-select-tile-type="Mosaics">
-							<p class="heading">Mosaics</p>
-							<img class="vit-tile-type" src="<?=base_url();?>assets/decorate_mosaics.jpg">
-							<div class="v-select-tile-type-button">Select »</div>
-						</div>
-					</div>
-					<div class="vl-tile-type">
-						<div class="v-tile-type-selector" data-select-tile-type="Natural Stone">
-							<p class="heading">Natural Stone</p>
-							<img class="vit-tile-type" src="<?=base_url();?>assets/decorate_natural_stone.jpg">
-							<div class="v-select-tile-type-button">Select »</div>
-						</div>
-					</div>
-					<div class="vl-tile-type vl-tile-type-glass-splashbacks">
-						<div class="v-tile-type-selector" data-select-tile-type="Glass Splashbacks">
-							<p class="heading">Glass Splashbacks</p>
-							<img class="vit-tile-type" src="<?=base_url();?>assets/element_splashbacks.jpg">
-							<div class="v-select-tile-type-button">Select »</div>
-						</div>
-					</div>
-					<div class="vl-tile-type">
-						<div class="v-tile-type-selector" data-select-tile-type="Borders">
-							<p class="heading">Borders and Corners</p>
-							<img class="vit-tile-type" src="<?=base_url();?>assets/decorate_borders.jpg">
-							<div class="v-select-tile-type-button">Select »</div>
-						</div>
-					</div>
-					<div class="vl-tile-type">
-						<div class="v-tile-type-selector" data-select-tile-type="Capping and Finishing Strips">
-							<p class="heading">Capping and Finishing Strips</p>
-							<img class="vit-tile-type" src="<?=base_url();?>assets/decorate_capping.jpg">
-							<div class="v-select-tile-type-button">Select »</div>
-						</div>
-					</div>
-<!--					<div class="vl-tile-type">
-						<div class="v-tile-type-selector" data-select-tile-type="Wood Flooring">
-							<p class="heading">Wood Flooring</p>
-							<img class="vit-tile-type" src="images/<?=base_url();?>assets/decorate_wood_flooring.jpg">
-							<div class="v-select-tile-type-button">Select &raquo;</div>
-						</div>
-					</div> -->
-					<div class="vl-tile-type">
-						<div class="v-tile-type-selector" data-select-tile-type="Grout">
-							<p class="heading">Grout</p>
-							<img class="vit-tile-type" src="<?=base_url();?>assets/decorate_grout.jpg">
-							<div class="v-select-tile-type-button">Select »</div>
-						</div>
-					</div>
-					<div class="vl-tile-type">
-						<div class="v-tile-type-selector" data-select-tile-type="Paint">
-							<p class="heading">Paint</p>
-							<img class="vit-tile-type" src="<?=base_url();?>assets/decorate_paint.jpg">
-							<div class="v-select-tile-type-button">Select »</div>
-						</div>
-					</div>
-					<div class="vl-tile-type v-coloured-worktops-cabinets" style="display: none;">
-						<div class="v-tile-type-selector" data-select-tile-type="Cabinets">
-							<p class="heading">Cabinets</p>
-							<img class="vit-tile-type" src="<?=base_url();?>assets/decorate_cabinets.jpg">
-							<div class="v-select-tile-type-button">Select »</div>
-						</div>
-					</div>
-					<div class="vl-tile-type v-coloured-worktops-cabinets" style="display: none;">
-						<div class="v-tile-type-selector" data-select-tile-type="Worktops">
-							<p class="heading">Worktops</p>
-							<img class="vit-tile-type" src="<?=base_url();?>assets/decorate_worktops.jpg">
-							<div class="v-select-tile-type-button">Select »</div>
-						</div>
-					</div>
-					<div class="vl-tile-type v-textured-worktops-cabinets">
-						<div class="v-tile-type-selector" data-select-tile-type="Cabinets Texture">
-							<p class="heading">Cabinets</p>
-							<img class="vit-tile-type" src="<?=base_url();?>assets/decorate_cabinets.jpg">
-							<!-- <img class="vit-tile-type" src="images/<?=base_url();?>assets/element_visualiser_worktops_icon.jpg"> -->
-							<div class="v-select-tile-type-button">Select »</div>
-						</div>
-					</div>
-					<div class="vl-tile-type v-textured-worktops-cabinets">
-						<div class="v-tile-type-selector" data-select-tile-type="Worktops Texture">
-							<p class="heading">Worktops</p>
-							<img class="vit-tile-type" src="<?=base_url();?>assets/element_visualiser_worktops_icon.jpg">
-							<div class="v-select-tile-type-button">Select »</div>
-						</div>
-					</div>
+<!--					<div class="vl-tile-type">-->
+<!--						<div class="v-tile-type-selector" data-select-tile-type="Mosaics">-->
+<!--							<p class="heading">Mosaics</p>-->
+<!--							<img class="vit-tile-type" src="--><?//=base_url();?><!--assets/decorate_mosaics.jpg">-->
+<!--							<div class="v-select-tile-type-button">Select »</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--					<div class="vl-tile-type">-->
+<!--						<div class="v-tile-type-selector" data-select-tile-type="Natural Stone">-->
+<!--							<p class="heading">Natural Stone</p>-->
+<!--							<img class="vit-tile-type" src="--><?//=base_url();?><!--assets/decorate_natural_stone.jpg">-->
+<!--							<div class="v-select-tile-type-button">Select »</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--					<div class="vl-tile-type vl-tile-type-glass-splashbacks">-->
+<!--						<div class="v-tile-type-selector" data-select-tile-type="Glass Splashbacks">-->
+<!--							<p class="heading">Glass Splashbacks</p>-->
+<!--							<img class="vit-tile-type" src="--><?//=base_url();?><!--assets/element_splashbacks.jpg">-->
+<!--							<div class="v-select-tile-type-button">Select »</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--					<div class="vl-tile-type">-->
+<!--						<div class="v-tile-type-selector" data-select-tile-type="Borders">-->
+<!--							<p class="heading">Borders and Corners</p>-->
+<!--							<img class="vit-tile-type" src="--><?//=base_url();?><!--assets/decorate_borders.jpg">-->
+<!--							<div class="v-select-tile-type-button">Select »</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--					<div class="vl-tile-type">-->
+<!--						<div class="v-tile-type-selector" data-select-tile-type="Capping and Finishing Strips">-->
+<!--							<p class="heading">Capping and Finishing Strips</p>-->
+<!--							<img class="vit-tile-type" src="--><?//=base_url();?><!--assets/decorate_capping.jpg">-->
+<!--							<div class="v-select-tile-type-button">Select »</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--					<div class="vl-tile-type">-->
+<!--						<div class="v-tile-type-selector" data-select-tile-type="Wood Flooring">-->
+<!--							<p class="heading">Wood Flooring</p>-->
+<!--							<img class="vit-tile-type" src="images/--><?//=base_url();?><!--assets/decorate_wood_flooring.jpg">-->
+<!--							<div class="v-select-tile-type-button">Select &raquo;</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--					<div class="vl-tile-type">-->
+<!--						<div class="v-tile-type-selector" data-select-tile-type="Grout">-->
+<!--							<p class="heading">Grout</p>-->
+<!--							<img class="vit-tile-type" src="--><?//=base_url();?><!--assets/decorate_grout.jpg">-->
+<!--							<div class="v-select-tile-type-button">Select »</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--					<div class="vl-tile-type">-->
+<!--						<div class="v-tile-type-selector" data-select-tile-type="Paint">-->
+<!--							<p class="heading">Paint</p>-->
+<!--							<img class="vit-tile-type" src="--><?//=base_url();?><!--assets/decorate_paint.jpg">-->
+<!--							<div class="v-select-tile-type-button">Select »</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--					<div class="vl-tile-type v-coloured-worktops-cabinets" style="display: none;">-->
+<!--						<div class="v-tile-type-selector" data-select-tile-type="Cabinets">-->
+<!--							<p class="heading">Cabinets</p>-->
+<!--							<img class="vit-tile-type" src="--><?//=base_url();?><!--assets/decorate_cabinets.jpg">-->
+<!--							<div class="v-select-tile-type-button">Select »</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--					<div class="vl-tile-type v-coloured-worktops-cabinets" style="display: none;">-->
+<!--						<div class="v-tile-type-selector" data-select-tile-type="Worktops">-->
+<!--							<p class="heading">Worktops</p>-->
+<!--							<img class="vit-tile-type" src="--><?//=base_url();?><!--assets/decorate_worktops.jpg">-->
+<!--							<div class="v-select-tile-type-button">Select »</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--					<div class="vl-tile-type v-textured-worktops-cabinets">-->
+<!--						<div class="v-tile-type-selector" data-select-tile-type="Cabinets Texture">-->
+<!--							<p class="heading">Cabinets</p>-->
+<!--							<img class="vit-tile-type" src="--><?//=base_url();?><!--assets/decorate_cabinets.jpg">-->
+<!--							<!-- <img class="vit-tile-type" src="images/--><?//=base_url();?><!--assets/element_visualiser_worktops_icon.jpg"> -->-->
+<!--							<div class="v-select-tile-type-button">Select »</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--					<div class="vl-tile-type v-textured-worktops-cabinets">-->
+<!--						<div class="v-tile-type-selector" data-select-tile-type="Worktops Texture">-->
+<!--							<p class="heading">Worktops</p>-->
+<!--							<img class="vit-tile-type" src="--><?//=base_url();?><!--assets/element_visualiser_worktops_icon.jpg">-->
+<!--							<div class="v-select-tile-type-button">Select »</div>-->
+<!--						</div>-->
+<!--					</div>-->
 				</div>
 			</div>
 			
 			<div class="vit-content-tiles" style="display: none;">
 
-				<div class="vit-search-in-progress hide">
-					<img src="<?=base_url();?>assets/ajax-loader-transparent.gif">
-					<p>Searching...please wait...</p>
-				</div>
-
-				<div class="vit-not-search-in-progress">
-
-				<div class="v-select-tile-back"> « Back</div>
+<!--				<div class="vit-search-in-progress hide">-->
+<!--					<img src="--><?//=base_url();?><!--assets/ajax-loader-transparent.gif">-->
+<!--					<p>Searching...please wait...</p>-->
+<!--				</div>-->
+<!---->
+<!--				<div class="vit-not-search-in-progress">-->
+<!---->
+<!--				<div class="v-select-tile-back"> « Back</div>-->
 				<p class="heading wall">Wall Tiles</p>
 				<p class="heading floor">Floor Tiles</p>
 				<p class="heading mosaics">Mosaics</p>
@@ -1177,21 +1192,96 @@
 				<div class="vit-worktops-cabinets-subheading-wood-template hide"><p class="vit-worktops-cabinets-subheading vit-worktops-cabinets-subheading-wood">Wood</p></div>
 				<div class="vit-worktops-cabinets-subheading-granite-template hide"><br><br><br><br><br><br><p class="vit-worktops-cabinets-subheading vit-worktops-cabinets-subheading-granite">Granite/Quartz</p></div>
 
-				<div class="tiles-list vl-tiles">
-					<div class="vl-tile-container [CROPHEIGHT] [WORKTOPSCABINETS]">
-						<div class="vl-tile [TILE-STYLE]" data-select-id="SELECT-ID-TILE" data-entry-index="[ENTRY-INDEX]">
-							<img class="vit-tile [WORKTOPSCABINETS]" src="<?=base_url();?>assets/811639.jpg">
-								<div class="vit-tile-details [HIDEDETAILS]">
-									<p class="small-text">[SIZE]</p>
-									<p class="small-text">Suitable for [SUITABLEFOR]</p>
-<!--									<p class="price"><strong>[PRICE1]</strong>&nbsp;<span class="small-text">[PRICE2]</span></p> -->
-									<p class="price [HIDEM2PRICE]"><strong>[PRICE3]</strong>&nbsp;<span class="small-text">price/m<sup>2</sup></span></p>
-							</div>
-						</div>
-					</div>
-				</div>
+<!--				<div class="tiles-list vl-tiles">-->
+<!--					<div class="vl-tile-container [CROPHEIGHT] [WORKTOPSCABINETS]">-->
+<!--						<div class="vl-tile [TILE-STYLE]" data-select-id="SELECT-ID-TILE" data-entry-index="[ENTRY-INDEX]">-->
+<!--							<img class="vit-tile [WORKTOPSCABINETS]" src="--><?//=base_url();?><!--assets/811639.jpg">-->
+<!--								<div class="vit-tile-details [HIDEDETAILS]">-->
+<!--									<p class="small-text">[SIZE]</p>-->
+<!--									<p class="small-text">Suitable for [SUITABLEFOR]</p>-->
+<!--<!--									<p class="price"><strong>[PRICE1]</strong>&nbsp;<span class="small-text">[PRICE2]</span></p> -->-->
+<!--									<p class="price [HIDEM2PRICE]"><strong>[PRICE3]</strong>&nbsp;<span class="small-text">price/m<sup>2</sup></span></p>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
 
-			</div>
+                <div class="tiles-list vl-tiles">
+                    <div class="tiles-list vl-tiles">
+                        <div class="vl-tile-container">
+                            <div class="vl-tile " data-select-id="art-16-light-brown-gl.png" data-entry-index="3">
+                                <img class="vit-tile" src="assets/tiles/art-16-light-brown-gl.png">
+                                <div class="vit-tile-details">
+                                    <p class="small-text">20cm x 10cm</p>
+                                    <p class="small-text">Suitable for Wall</p>
+                                    <!--									<p class="price"><strong>[PRICE1]</strong>&nbsp;<span class="small-text">[PRICE2]</span></p> -->
+                                    <p class="price "><strong>£29.50</strong>&nbsp;<span class="small-text">price/m<sup>2</sup></span></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="vl-tile-container">
+                            <div class="vl-tile " data-select-id="art-16-brown-gl.png" data-entry-index="3">
+                                <img class="vit-tile" src="assets/tiles/art-16-brown-gl.png">
+                                <div class="vit-tile-details">
+                                    <p class="small-text">20cm x 10cm</p>
+                                    <p class="small-text">Suitable for Wall</p>
+                                    <!--									<p class="price"><strong>[PRICE1]</strong>&nbsp;<span class="small-text">[PRICE2]</span></p> -->
+                                    <p class="price "><strong>£29.50</strong>&nbsp;<span class="small-text">price/m<sup>2</sup></span></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="vl-tile-container">
+                            <div class="vl-tile " data-select-id="kate-green-matt.png" data-entry-index="1">
+                                <img class="vit-tile" src="http://res.cloudinary.com/halfbug/image/upload/v1525091214/kate-green-matt.png">
+                                <div class="vit-tile-details">
+                                    <p class="small-text">12cm x 18cm</p>
+                                    <p class="small-text">Suitable for Wall</p>
+                                    <!--									<p class="price"><strong>[PRICE1]</strong>&nbsp;<span class="small-text">[PRICE2]</span></p> -->
+                                    <p class="price "><strong>£19.50</strong>&nbsp;<span class="small-text">price/m<sup>2</sup></span></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="vl-tile-container">
+                            <div class="vl-tile " data-select-id="carla-dark-ivory-glossy.png" data-entry-index="1">
+                                <img class="vit-tile" src="http://res.cloudinary.com/halfbug/image/upload/v1525091201/carla-dark-ivory-glossy.png">
+                                <div class="vit-tile-details">
+                                    <p class="small-text">12cm x 18cm</p>
+                                    <p class="small-text">Suitable for Wall</p>
+                                    <!--									<p class="price"><strong>[PRICE1]</strong>&nbsp;<span class="small-text">[PRICE2]</span></p> -->
+                                    <p class="price "><strong>£19.50</strong>&nbsp;<span class="small-text">price/m<sup>2</sup></span></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="vl-tile-container">
+                            <div class="vl-tile " data-select-id="art-008-bluish-grey-glossy.png" data-entry-index="3">
+                                <img class="vit-tile" src="assets/tiles/art-008-bluish-grey-glossy.png">
+                                <div class="vit-tile-details">
+                                    <p class="small-text">20cm x 10cm</p>
+                                    <p class="small-text">Suitable for Wall</p>
+                                    <!--									<p class="price"><strong>[PRICE1]</strong>&nbsp;<span class="small-text">[PRICE2]</span></p> -->
+                                    <p class="price "><strong>£29.50</strong>&nbsp;<span class="small-text">price/m<sup>2</sup></span></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="vl-tile-container">
+                            <div class="vl-tile " data-select-id="art-007-light-walnut-brown-glossy.png" data-entry-index="3">
+                                <img class="vit-tile" src="assets/tiles/art-007-light-walnut-brown-glossy.png">
+                                <div class="vit-tile-details">
+                                    <p class="small-text">20cm x 10cm</p>
+                                    <p class="small-text">Suitable for Wall</p>
+                                    <!--									<p class="price"><strong>[PRICE1]</strong>&nbsp;<span class="small-text">[PRICE2]</span></p> -->
+                                    <p class="price "><strong>£29.50</strong>&nbsp;<span class="small-text">price/m<sup>2</sup></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    </div>
 
 			</div>
 
@@ -1510,7 +1600,13 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
 
+    // var selected_tile = "";
+    // var selected_category = "";
 </script>
+<script type="text/javascript" src="<?=base_url();?>assets/layout.js"></script>
+
 <script type="text/javascript" src="<?=base_url();?>assets/tabui.js"></script>
+
+
 
 </body></html>
