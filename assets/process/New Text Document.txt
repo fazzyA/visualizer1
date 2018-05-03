@@ -1,0 +1,28 @@
+Wall
+---------------------------------------
+http://res.cloudinary.com/halfbug/image/upload/c_thumb,fl_tiled,h_120,l_art-004-light-medium-blue-glossy.png,w_180/l_basic_pattern_wall.png/fl_cutter,l_wallmask.png/v1525018972/blankmask.png
+
+-----------php-----------
+
+cl_image_tag("blankmask.png", array("transformation"=>array(
+  array("flags"=>"tiled", "height"=>120, "overlay"=>"art-004-light-medium-blue-glossy.png", "width"=>180, "crop"=>"thumb"),
+  array("overlay"=>"basic_pattern_wall.png"),
+  array("flags"=>"cutter", "overlay"=>"wallmask.png")
+  )))
+----------------------------------------------
+floor
+----------------------------------------------
+http://res.cloudinary.com/halfbug/image/upload/c_thumb,fl_tiled,h_120,l_art-007-light-walnut-brown-glossy.png,w_180/l_basic_pattern_floor.png/fl_cutter,l_floormask.png/v1525018972/blankmask.png
+
+----------------php-----------------
+cl_image_tag("blankmask.png", array("transformation"=>array(
+  array("flags"=>"tiled", "height"=>120, "overlay"=>"art-007-light-walnut-brown-glossy.png", "width"=>180, "crop"=>"thumb"),
+  array("overlay"=>"basic_pattern_floor.png"),
+  array("flags"=>"cutter", "overlay"=>"floormask.png")
+  )))
+
+----------php-----------
+cl_image_tag("blankmask.png", array("transformation"=>array(
+  array("flags"=>"tiled", "height"=>120, "overlay"=>"art-007-light-walnut-brown-glossy.png", "width"=>180, "crop"=>"scale"),
+  array("flags"=>"cutter", "overlay"=>"floormask.png")
+  )))
